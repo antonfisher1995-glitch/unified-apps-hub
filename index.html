@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unified Apps Hub — GitHub Pages</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            hub: { bg: '#0b1220', card: '#111827', border: '#1f2937' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background:
+        radial-gradient(1000px 500px at 20% -10%, rgba(245,158,11,.09), transparent 55%),
+        radial-gradient(900px 450px at 90% 10%, rgba(56,189,248,.07), transparent 50%),
+        radial-gradient(700px 400px at 50% 100%, rgba(167,139,250,.06), transparent 45%),
+        #0b1220;
+      min-height: 100vh;
+    }
+    .card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -20px rgba(0,0,0,.7); }
+  </style>
+</head>
+<body class="text-slate-100 antialiased">
+  <header class="border-b border-hub-border/80 bg-hub-bg/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center font-bold shadow-lg shadow-amber-500/25">U</div>
+        <div>
+          <h1 class="font-bold tracking-wide text-sm sm:text-base uppercase">Unified Apps Hub</h1>
+          <p class="text-[11px] text-slate-400 font-mono">4 client-side tools · GitHub Pages ready</p>
+        </div>
+      </div>
+      <span class="hidden sm:inline text-xs font-mono px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300">No backend</span>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-10 md:py-14">
+    <section class="text-center mb-12">
+      <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-4">
+        One repository · Four complete apps
+      </p>
+      <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">Everything in one place</h2>
+      <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+        Local Event Creator, Al-Rahma Hub, Quantum Stego Suite, and Travel to Russia Abroad (2,800-word Russian vocabulary).
+        All features preserved. Vocabulary file is used as-is.
+      </p>
+    </section>
+
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
+      <!-- Event Creator -->
+      <a href="./event-creator/" class="card block bg-hub-card border border-hub-border rounded-2xl p-6 hover:border-amber-500/45">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-xl">📍</div>
+          <span class="text-[10px] font-mono px-2 py-1 rounded bg-slate-800 text-slate-400 border border-slate-700">LOCAL STORAGE</span>
+        </div>
+        <h3 class="text-lg font-bold mb-1.5 group-hover:text-amber-400">Local Event Creator</h3>
+        <p class="text-sm text-slate-400 mb-4 leading-relaxed">GPS pin + nudge, photo, map preview, localStorage events, native share sheet.</p>
+        <ul class="text-xs text-slate-500 font-mono space-y-1 mb-4">
+          <li>• High-accuracy GPS + foot nudges</li>
+          <li>• Photo resize & device storage</li>
+          <li>• Google Maps embed + share</li>
+        </ul>
+        <span class="text-amber-400 text-sm font-medium">Open app →</span>
+      </a>
+
+      <!-- Al-Rahma -->
+      <a href="./al-rahma-hub/" class="card block bg-hub-card border border-hub-border rounded-2xl p-6 hover:border-sky-500/45">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-xl">🏪</div>
+          <span class="text-[10px] font-mono px-2 py-1 rounded bg-slate-800 text-slate-400 border border-slate-700">COOKIES</span>
+        </div>
+        <h3 class="text-lg font-bold mb-1.5">Al-Rahma Hub</h3>
+        <p class="text-sm text-slate-400 mb-4 leading-relaxed">Merchant/user onboarding, loyalty stamps, category bonuses, cookie inspector.</p>
+        <ul class="text-xs text-slate-500 font-mono space-y-1 mb-4">
+          <li>• Captcha onboarding + profile</li>
+          <li>• 5-slot stamp card + reward</li>
+          <li>• Theme toggle & cookie tools</li>
+        </ul>
+        <span class="text-sky-400 text-sm font-medium">Open app →</span>
+      </a>
+
+      <!-- Stego -->
+      <a href="./stego-crypt/" class="card block bg-hub-card border border-hub-border rounded-2xl p-6 hover:border-violet-500/45">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-violet-500/15 border border-violet-500/30 flex items-center justify-center text-xl">🔐</div>
+          <span class="text-[10px] font-mono px-2 py-1 rounded bg-slate-800 text-slate-400 border border-slate-700">PWA + CRYPTO</span>
+        </div>
+        <h3 class="text-lg font-bold mb-1.5">Quantum Stego Suite</h3>
+        <p class="text-sm text-slate-400 mb-4 leading-relaxed">AES-GCM keys, QR identity, friends list, encrypt + LSB image steganography.</p>
+        <ul class="text-xs text-slate-500 font-mono space-y-1 mb-4">
+          <li>• Dynamic key + hard export</li>
+          <li>• Encode / decode stego photos</li>
+          <li>• Service worker offline cache</li>
+        </ul>
+        <span class="text-violet-400 text-sm font-medium">Open app →</span>
+      </a>
+
+      <!-- Travel Russia -->
+      <a href="./travel-russia/" class="card block bg-hub-card border border-hub-border rounded-2xl p-6 hover:border-emerald-500/45">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-xl">🇷🇺</div>
+          <span class="text-[10px] font-mono px-2 py-1 rounded bg-slate-800 text-slate-400 border border-slate-700">2,800 WORDS</span>
+        </div>
+        <h3 class="text-lg font-bold mb-1.5">Travel to Russia Abroad</h3>
+        <p class="text-sm text-slate-400 mb-4 leading-relaxed">Russian-from-English study: flashcards, quiz, typing, match, listening, writing, civics.</p>
+        <ul class="text-xs text-slate-500 font-mono space-y-1 mb-4">
+          <li>• Full 2,800-word vocabulary (unchanged)</li>
+          <li>• CEFR levels A1–B2 + progress</li>
+          <li>• Built by GitHub Actions for Pages</li>
+        </ul>
+        <span class="text-emerald-400 text-sm font-medium">Open app →</span>
+      </a>
+    </section>
+
+    <section class="mt-12 grid md:grid-cols-2 gap-5">
+      <div class="bg-hub-card/70 border border-hub-border rounded-2xl p-5">
+        <h4 class="font-semibold text-slate-200 mb-2">✓ Preserved</h4>
+        <ul class="text-sm text-slate-400 space-y-1.5">
+          <li>Every original feature of all four apps</li>
+          <li>Complete vocabulary.json (2,800 entries) — not rewritten</li>
+          <li>Stego PWA files (manifest + service worker)</li>
+          <li>Event Creator GPS / share / photo pipeline</li>
+        </ul>
+      </div>
+      <div class="bg-hub-card/70 border border-hub-border rounded-2xl p-5">
+        <h4 class="font-semibold text-slate-200 mb-2">Deploy</h4>
+        <p class="text-sm text-slate-400 leading-relaxed">
+          Push this folder to a GitHub repository. GitHub Actions builds the React travel app and publishes the whole site to GitHub Pages.
+          See <strong class="text-slate-300">README.md</strong> for step-by-step instructions.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-hub-border mt-6 py-8">
+    <div class="max-w-5xl mx-auto px-4 text-center text-xs text-slate-500 font-mono">
+      Unified Apps Hub · Event Creator · Al-Rahma Hub · StegoCrypt · Travel to Russia Abroad
+    </div>
+  </footer>
+</body>
+</html>

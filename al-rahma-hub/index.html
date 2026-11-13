@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL-RAHMA HUB - Local Merchant & User Ecosystem</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        rahma: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            900: '#78350f',
+                            950: '#451a03',
+                        },
+                        darkhub: {
+                            bg: '#090d16',
+                            card: '#111827',
+                            border: '#1f2937',
+                            accent: '#f59e0b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Courier New', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+        .glow-gold {
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+        }
+        .stamp-glow {
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-darkhub-bg text-slate-100 font-sans min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950 transition-colors duration-300" id="body-root">
+
+    <!-- Top Navigation Bar -->
+    <header class="border-b border-darkhub-border bg-slate-900/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('hub')">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-500 font-bold glow-gold">
+                    <i class="fa-solid fa-kaaba text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold tracking-wider text-slate-100 uppercase text-sm md:text-base glow-text">AL-RAHMA HUB</h1>
+                    <p class="text-[10px] text-amber-500/80 font-mono tracking-widest">OFFLINE COOKIE ECOSYSTEM</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 text-xs">
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleTheme()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-amber-400 transition flex items-center space-x-1.5" title="Toggle Light/Dark Theme">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    <span id="theme-text" class="hidden sm:inline font-mono">Dark Mode</span>
+                </button>
+
+                <!-- Navigation Views -->
+                <button onclick="switchView('splash')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition flex items-center space-x-1">
+                    <i class="fa-solid fa-id-card text-amber-500"></i>
+                    <span class="hidden sm:inline">Splash</span>
+                </button>
+                <button onclick="scrollToSection('cookie-inspector')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition flex items-center space-x-1">
+                    <i class="fa-solid fa-cookie-bite text-amber-500"></i>
+                    <span class="hidden sm:inline">Cookies</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 space-y-8">
+
+        <!-- ================= SECTION 1: SPLASH & ONBOARDING SCREEN ================= -->
+        <section id="view-splash" class="space-y-6">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-2xl border border-amber-500/30 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 p-8 md:p-12 text-center glow-gold">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(245,158,11,0.1),transparent_70%)] pointer-events-none"></div>
+                <div class="max-w-2xl mx-auto space-y-4">
+                    <div class="inline-block px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-400 font-mono text-xs mb-2">
+                        Welcome to Al-Rahma Hub
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white glow-text">
+                        Local Business Onboarding
+                    </h2>
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed">
+                        Connect local merchants and customers through digital loyalty stamps and shared promotional swap-bags. Direct state persistence using local browser cookies.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Registration Form Card -->
+            <div class="max-w-xl mx-auto bg-darkhub-card border border-darkhub-border rounded-2xl p-6 md:p-8 space-y-6 glow-gold">
+                <div class="border-b border-slate-800 pb-4 text-center">
+                    <h3 class="text-xl font-bold text-slate-100">Create / Update Profile</h3>
+                    <p class="text-xs text-slate-400 font-mono mt-1">Enter your details to generate local storage cookies</p>
+                </div>
+
+                <form id="onboarding-form" onsubmit="handleOnboardingSubmit(event)" class="space-y-4">
+                    <!-- Nickname Input -->
+                    <div>
+                        <label class="block text-xs font-mono text-slate-400 mb-1">USER NICKNAME *</label>
+                        <div class="relative">
+                            <input type="text" id="onboard-nickname" required placeholder="e.g. RahmaUser" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500 transition">
+                            <i class="fa-solid fa-user text-slate-600 absolute right-3 top-2.5 text-xs"></i>
+                        </div>
+                    </div>
+
+                    <!-- Business Name -->
+                    <div>
+                        <label class="block text-xs font-mono text-slate-400 mb-1">LOCAL BUSINESS NAME</label>
+                        <div class="relative">
+                            <input type="text" id="onboard-bizname" placeholder="e.g. Damascus Bakery" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500 transition">
+                            <i class="fa-solid fa-store text-slate-600 absolute right-3 top-2.5 text-xs"></i>
+                        </div>
+                    </div>
+
+                    <!-- Invite Code with Flag Indicator -->
+                    <div>
+                        <label class="block text-xs font-mono text-slate-400 mb-1">LOCAL BUSINESS INVITE CODE</label>
+                        <div class="flex space-x-2">
+                            <div class="relative flex-grow">
+                                <input type="text" id="onboard-code" placeholder="e.g. SYR-4892" class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-2 text-sm font-mono text-slate-100 focus:outline-none focus:border-amber-500 transition">
+                                <span class="absolute left-3 top-2.5 text-sm" title="Syria Flag">🇸🇾</span>
+                            </div>
+                            <button type="button" onclick="autoGenerateCode()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs font-mono text-amber-400 transition whitespace-nowrap">
+                                Generate
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Simple Captcha / Security Validation -->
+                    <div class="p-3 bg-slate-950 border border-slate-800 rounded-lg space-y-2">
+                        <label class="block text-xs font-mono text-amber-400">SECURITY CAPTCHA</label>
+                        <div class="flex items-center space-x-3 text-xs font-mono">
+                            <span id="captcha-question" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded text-slate-200">7 + 5 = ?</span>
+                            <input type="number" id="captcha-answer" required placeholder="Answer" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm transition shadow-lg shadow-amber-500/20 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Create Account & Save Cookies</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 2: MAIN HUB INTERFACE ================= -->
+        <section id="view-hub" class="space-y-8 hidden">
+            
+            <!-- User Status Header Dashboard Card -->
+            <div class="bg-darkhub-card border border-darkhub-border rounded-2xl p-5 md:p-6 glow-gold">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-500 text-2xl font-bold">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <h3 id="hub-nickname" class="text-xl font-bold text-white">Guest User</h3>
+                                <span id="hub-flag" class="text-base">🇸🇾</span>
+                            </div>
+                            <p id="hub-bizname" class="text-xs text-slate-400 font-mono">No Local Business Registered</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-3 text-xs font-mono">
+                        <div class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center space-x-2">
+                            <span class="text-slate-500">INVITE CODE:</span>
+                            <span id="hub-code" class="text-amber-400 font-bold">NONE</span>
+                        </div>
+                        <div class="px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>COOKIE SYNC ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Digital Stamps Loyalty Tracker -->
+            <div class="bg-darkhub-card border border-darkhub-border rounded-2xl p-6 space-y-4 glow-gold">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-3 gap-2">
+                    <div>
+                        <h3 class="font-bold text-slate-100 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-stamp text-amber-500"></i> Digital Loyalty Stamps
+                        </h3>
+                        <p class="text-xs text-slate-400">Collect 5 stamps to unlock the local merchant promotional swap-bag</p>
+                    </div>
+                    <span id="stamp-progress-text" class="text-xs font-mono text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+                        0 / 5 Collected
+                    </span>
+                </div>
+
+                <!-- 5 Stamp Slots -->
+                <div class="grid grid-cols-5 gap-3 max-w-xl mx-auto py-4">
+                    <div id="hub-stamp-1" onclick="toggleStampSlot(1)" class="aspect-square rounded-xl bg-slate-950 border border-slate-800 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500/50 transition text-slate-600">
+                        <i class="fa-solid fa-certificate text-xl mb-1"></i>
+                        <span class="text-[10px] font-mono">#1</span>
+                    </div>
+                    <div id="hub-stamp-2" onclick="toggleStampSlot(2)" class="aspect-square rounded-xl bg-slate-950 border border-slate-800 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500/50 transition text-slate-600">
+                        <i class="fa-solid fa-certificate text-xl mb-1"></i>
+                        <span class="text-[10px] font-mono">#2</span>
+                    </div>
+                    <div id="hub-stamp-3" onclick="toggleStampSlot(3)" class="aspect-square rounded-xl bg-slate-950 border border-slate-800 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500/50 transition text-slate-600">
+                        <i class="fa-solid fa-certificate text-xl mb-1"></i>
+                        <span class="text-[10px] font-mono">#3</span>
+                    </div>
+                    <div id="hub-stamp-4" onclick="toggleStampSlot(4)" class="aspect-square rounded-xl bg-slate-950 border border-slate-800 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500/50 transition text-slate-600">
+                        <i class="fa-solid fa-certificate text-xl mb-1"></i>
+                        <span class="text-[10px] font-mono">#4</span>
+                    </div>
+                    <div id="hub-stamp-5" onclick="toggleStampSlot(5)" class="aspect-square rounded-xl bg-slate-950 border border-slate-800 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500/50 transition text-slate-600">
+                        <i class="fa-solid fa-gift text-xl mb-1"></i>
+                        <span class="text-[10px] font-mono">#5 Reward</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center text-xs font-mono pt-2 border-t border-slate-800">
+                    <span class="text-slate-500">* Click on individual slots to toggle stamps</span>
+                    <button onclick="resetStamps()" class="text-amber-400 hover:underline">Reset Stamps</button>
+                </div>
+            </div>
+
+            <!-- Decision Tree / Category Options -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Option 1 -->
+                <div class="bg-darkhub-card border border-darkhub-border rounded-xl p-5 space-y-3 hover:border-amber-500/50 transition">
+                    <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-100 text-sm">Artisan Bakery & Sweets</h4>
+                    <p class="text-xs text-slate-400">Discover traditional recipes and redeem cross-promotional vouchers with nearby merchant partners.</p>
+                    <button onclick="claimCategoryBonus('Artisan Bakery')" class="w-full py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 font-mono text-xs border border-slate-700 transition">
+                        Select & Earn Stamp
+                    </button>
+                </div>
+
+                <!-- Option 2 -->
+                <div class="bg-darkhub-card border border-darkhub-border rounded-xl p-5 space-y-3 hover:border-amber-500/50 transition">
+                    <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500">
+                        <i class="fa-solid fa-hands-holding-circle"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-100 text-sm">Local Craft & Textiles</h4>
+                    <p class="text-xs text-slate-400">Support local artisans and collect digital verification badges for authentic handmade items.</p>
+                    <button onclick="claimCategoryBonus('Local Craft')" class="w-full py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 font-mono text-xs border border-slate-700 transition">
+                        Select & Earn Stamp
+                    </button>
+                </div>
+
+                <!-- Option 3 -->
+                <div class="bg-darkhub-card border border-darkhub-border rounded-xl p-5 space-y-3 hover:border-amber-500/50 transition">
+                    <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-100 text-sm">Organic Produce & Markets</h4>
+                    <p class="text-xs text-slate-400">Connect directly with regional farms to swap-bag daily fresh produce packages.</p>
+                    <button onclick="claimCategoryBonus('Organic Produce')" class="w-full py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 font-mono text-xs border border-slate-700 transition">
+                        Select & Earn Stamp
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interactive Sandbox / Playground Section -->
+            <div class="bg-darkhub-card border border-darkhub-border rounded-2xl p-6 space-y-4 glow-gold">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                    <h3 class="font-bold text-slate-100 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad text-amber-500"></i> Interactive Hub Sandbox
+                    </h3>
+                    <span class="text-xs font-mono text-slate-500">LIVE COOKIE MUTATOR</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div>
+                        <label class="block font-mono text-slate-400 mb-1">CUSTOM NOTE TO STORE IN COOKIES</label>
+                        <div class="flex space-x-2">
+                            <input type="text" id="sandbox-note" placeholder="Write custom state note..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-amber-500">
+                            <button onclick="saveSandboxNote()" class="px-4 py-2 bg-amber-500 text-slate-950 font-bold rounded-lg hover:bg-amber-600 transition whitespace-nowrap">
+                                Save Note
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-mono text-slate-400 mb-1">CURRENTLY STORED SANDBOX NOTE</label>
+                        <div id="sandbox-note-display" class="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-amber-400 min-h-[38px] flex items-center">
+                            No note stored in cookie yet.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= SECTION 3: COOKIE INSPECTOR & MANAGEMENT ================= -->
+        <section id="cookie-inspector" class="bg-darkhub-card border border-darkhub-border rounded-2xl p-6 space-y-4 glow-gold">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-4 gap-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500">
+                        <i class="fa-solid fa-terminal text-sm"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-100 text-base">Cookie Storage Inspector & Management</h3>
+                        <p class="text-xs text-slate-400">Directly inspect and mutate key-value pairs stored in document.cookie</p>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="refreshCookieDisplay()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs rounded-lg transition font-mono">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Refresh Display
+                    </button>
+                    <button onclick="clearAllCookies()" class="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 text-xs rounded-lg transition font-mono">
+                        <i class="fa-solid fa-trash mr-1"></i> Clear All Cookies
+                    </button>
+                </div>
+            </div>
+
+            <!-- Raw Cookies Console Output -->
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 font-mono text-xs overflow-x-auto min-h-[120px]">
+                <div class="text-slate-500 mb-2 border-b border-slate-900 pb-1 flex justify-between">
+                    <span>-- RAW DOCUMENT.COOKIE OUTPUT --</span>
+                    <span id="cookie-count-badge" class="text-amber-500">0 Keys Active</span>
+                </div>
+                <pre id="raw-cookie-output" class="text-amber-400 whitespace-pre-wrap">No cookies active.</pre>
+            </div>
+
+            <!-- Manual Key-Value Cookie Injector -->
+            <div class="pt-2">
+                <h4 class="text-xs font-mono text-slate-400 mb-2">MANUAL COOKIE INJECTOR</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <input type="text" id="manual-key" placeholder="Cookie Name (e.g. test_key)" class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                    <input type="text" id="manual-val" placeholder="Cookie Value (e.g. hello123)" class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                    <button onclick="injectManualCookie()" class="py-1.5 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-400 font-bold text-xs rounded-lg transition">
+                        Set Cookie Key
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-600 font-mono">
+        <p>AL-RAHMA HUB • GitHub Pages Client-Side Single-File Application</p>
+    </footer>
+
+    <!-- JavaScript Application Logic & Cookie Helpers -->
+    <script>
+        // --- Captcha State ---
+        let num1 = 7, num2 = 5;
+
+        // --- Standard Cookie Helper Functions ---
+        function setCookie(name, value, days = 30) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "; expires=" + date.toUTCString();
+            document.cookie = name + "=" + (encodeURIComponent(value) || "") + expires + "; path=/; SameSite=Lax";
+            // LocalStorage sync backup
+            try { localStorage.setItem(name, value); } catch(e){}
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+            }
+            // Fallback check from localStorage
+            try { return localStorage.getItem(name); } catch(e){}
+            return null;
+        }
+
+        function deleteCookie(name) {
+            document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            try { localStorage.removeItem(name); } catch(e){}
+        }
+
+        // --- App Global State ---
+        let appState = {
+            onboarded: false,
+            nickname: '',
+            bizname: '',
+            code: '',
+            stamps: [false, false, false, false, false],
+            sandboxNote: '',
+            theme: 'dark'
+        };
+
+        // --- Load State on Window Startup ---
+        window.onload = function() {
+            generateCaptcha();
+            loadStateFromCookies();
+            renderApp();
+            refreshCookieDisplay();
+        };
+
+        function generateCaptcha() {
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('captcha-question').innerText = `${num1} + ${num2} = ?`;
+        }
+
+        function autoGenerateCode() {
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            const code = `SYR-${randomNum}`;
+            document.getElementById('onboard-code').value = code;
+        }
+
+        function loadStateFromCookies() {
+            appState.onboarded = getCookie('user_onboarded') === 'true';
+            appState.nickname = getCookie('user_nickname') || '';
+            appState.bizname = getCookie('user_bizname') || '';
+            appState.code = getCookie('user_code') || '';
+            appState.sandboxNote = getCookie('sandbox_note') || '';
+            appState.theme = getCookie('app_theme') || 'dark';
+
+            const rawStamps = getCookie('user_stamps');
+            if (rawStamps) {
+                try {
+                    appState.stamps = JSON.parse(rawStamps);
+                } catch(e) {
+                    appState.stamps = [false, false, false, false, false];
+                }
+            }
+        }
+
+        function handleOnboardingSubmit(e) {
+            e.preventDefault();
+            const ans = parseInt(document.getElementById('captcha-answer').value);
+            if (ans !== (num1 + num2)) {
+                alert("Incorrect captcha security answer. Please try again.");
+                generateCaptcha();
+                return;
+            }
+
+            appState.nickname = document.getElementById('onboard-nickname').value.trim();
+            appState.bizname = document.getElementById('onboard-bizname').value.trim();
+            appState.code = document.getElementById('onboard-code').value.trim() || 'SYR-1001';
+            appState.onboarded = true;
+
+            // Save to cookies
+            setCookie('user_nickname', appState.nickname);
+            setCookie('user_bizname', appState.bizname);
+            setCookie('user_code', appState.code);
+            setCookie('user_onboarded', 'true');
+            setCookie('user_stamps', JSON.stringify(appState.stamps));
+
+            renderApp();
+            switchView('hub');
+            refreshCookieDisplay();
+        }
+
+        function switchView(view) {
+            const splashSec = document.getElementById('view-splash');
+            const hubSec = document.getElementById('view-hub');
+
+            if (view === 'splash') {
+                splashSec.classList.remove('hidden');
+                hubSec.classList.add('hidden');
+            } else {
+                splashSec.classList.add('hidden');
+                hubSec.classList.remove('hidden');
+            }
+        }
+
+        function renderApp() {
+            // Populate Hub Header details
+            document.getElementById('hub-nickname').innerText = appState.nickname || 'Guest User';
+            document.getElementById('hub-bizname').innerText = appState.bizname || 'No Local Business Registered';
+            document.getElementById('hub-code').innerText = appState.code || 'NONE';
+
+            // Prefill Onboarding form
+            if (appState.nickname) document.getElementById('onboard-nickname').value = appState.nickname;
+            if (appState.bizname) document.getElementById('onboard-bizname').value = appState.bizname;
+            if (appState.code) document.getElementById('onboard-code').value = appState.code;
+
+            // Render Stamps UI
+            let activeCount = 0;
+            for (let i = 1; i <= 5; i++) {
+                const stampEl = document.getElementById(`hub-stamp-${i}`);
+                if (appState.stamps[i - 1]) {
+                    activeCount++;
+                    stampEl.className = "aspect-square rounded-xl bg-amber-500 border border-amber-400 flex flex-col items-center justify-center cursor-pointer text-slate-950 font-bold stamp-glow transition scale-105";
+                    stampEl.querySelector('i').className = "fa-solid fa-circle-check text-xl mb-1";
+                } else {
+                    stampEl.className = "aspect-square rounded-xl bg-slate-950 border border-slate-800 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500/50 transition text-slate-600";
+                    stampEl.querySelector('i').className = (i === 5) ? "fa-solid fa-gift text-xl mb-1" : "fa-solid fa-certificate text-xl mb-1";
+                }
+            }
+            document.getElementById('stamp-progress-text').innerText = `${activeCount} / 5 Collected`;
+
+            // Sandbox note
+            document.getElementById('sandbox-note-display').innerText = appState.sandboxNote || 'No note stored in cookie yet.';
+
+            // View auto switch if onboarded
+            if (appState.onboarded) {
+                switchView('hub');
+            } else {
+                switchView('splash');
+            }
+
+            // Apply Theme
+            applyTheme(appState.theme);
+        }
+
+        function toggleStampSlot(index) {
+            appState.stamps[index - 1] = !appState.stamps[index - 1];
+            setCookie('user_stamps', JSON.stringify(appState.stamps));
+            renderApp();
+            refreshCookieDisplay();
+        }
+
+        function claimCategoryBonus(categoryName) {
+            // Add next available stamp
+            const emptyIdx = appState.stamps.indexOf(false);
+            if (emptyIdx !== -1) {
+                appState.stamps[emptyIdx] = true;
+                setCookie('user_stamps', JSON.stringify(appState.stamps));
+                renderApp();
+                refreshCookieDisplay();
+            } else {
+                alert("All 5 digital stamps collected! Cross-promotional voucher unlocked.");
+            }
+        }
+
+        function resetStamps() {
+            appState.stamps = [false, false, false, false, false];
+            setCookie('user_stamps', JSON.stringify(appState.stamps));
+            renderApp();
+            refreshCookieDisplay();
+        }
+
+        function saveSandboxNote() {
+            const noteInput = document.getElementById('sandbox-note').value.trim();
+            appState.sandboxNote = noteInput;
+            setCookie('sandbox_note', noteInput);
+            renderApp();
+            refreshCookieDisplay();
+        }
+
+        function toggleTheme() {
+            appState.theme = appState.theme === 'dark' ? 'light' : 'dark';
+            setCookie('app_theme', appState.theme);
+            applyTheme(appState.theme);
+            refreshCookieDisplay();
+        }
+
+        function applyTheme(theme) {
+            const body = document.getElementById('body-root');
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+
+            if (theme === 'light') {
+                body.classList.remove('dark', 'bg-darkhub-bg');
+                body.classList.add('bg-slate-100', 'text-slate-900');
+                themeIcon.className = "fa-solid fa-sun";
+                themeText.innerText = "Light Mode";
+            } else {
+                body.classList.add('dark', 'bg-darkhub-bg');
+                body.classList.remove('bg-slate-100', 'text-slate-900');
+                themeIcon.className = "fa-solid fa-moon";
+                themeText.innerText = "Dark Mode";
+            }
+        }
+
+        // --- Cookie Inspector Actions ---
+        function refreshCookieDisplay() {
+            const output = document.getElementById('raw-cookie-output');
+            const badge = document.getElementById('cookie-count-badge');
+            
+            if (!document.cookie || document.cookie.trim() === '') {
+                output.innerText = '// No active cookies set.';
+                badge.innerText = '0 Keys Active';
+            } else {
+                const parts = document.cookie.split(';').map(c => c.trim());
+                badge.innerText = `${parts.length} Keys Active`;
+                output.innerText = parts.join('\n');
+            }
+        }
+
+        function injectManualCookie() {
+            const key = document.getElementById('manual-key').value.trim();
+            const val = document.getElementById('manual-val').value.trim();
+            if (key) {
+                setCookie(key, val);
+                document.getElementById('manual-key').value = '';
+                document.getElementById('manual-val').value = '';
+                refreshCookieDisplay();
+            }
+        }
+
+        function clearAllCookies() {
+            deleteCookie('user_onboarded');
+            deleteCookie('user_nickname');
+            deleteCookie('user_bizname');
+            deleteCookie('user_code');
+            deleteCookie('user_stamps');
+            deleteCookie('sandbox_note');
+            deleteCookie('app_theme');
+
+            appState = {
+                onboarded: false,
+                nickname: '',
+                bizname: '',
+                code: '',
+                stamps: [false, false, false, false, false],
+                sandboxNote: '',
+                theme: 'dark'
+            };
+
+            document.getElementById('onboarding-form').reset();
+            renderApp();
+            refreshCookieDisplay();
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
